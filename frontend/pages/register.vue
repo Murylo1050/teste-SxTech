@@ -11,7 +11,6 @@ export default {
     },
     methods: {
         async submitForm() {
-            console.log(this.form);
             try {
                 const response = await $fetch('http://localhost:8000/register', {
                     method: 'POST',
@@ -32,7 +31,6 @@ export default {
                         });
                     });
                 } else {
-                    console.log('Error:', error);
                     toast.error('Ocorreu um erro inesperado!');
                 }
             }

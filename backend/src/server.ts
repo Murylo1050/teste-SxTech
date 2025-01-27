@@ -7,7 +7,6 @@ import authMiddleware from './middlewares/auth';
 import { validateLogin, validateRegistration } from './middlewares/validation'
 import { validationResult } from 'express-validator';
 import cors from 'cors';
-import { only } from 'node:test';
 
 
 dotenv.config();
@@ -95,5 +94,5 @@ app.get('/user/:username', authMiddleware, (req: Request, res: Response) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`App listening on port ${port}`)
 })

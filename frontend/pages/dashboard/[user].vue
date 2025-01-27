@@ -1,20 +1,18 @@
 <script setup>
 definePageMeta({
-    middleware: ['auth'], // Aplica o middleware apenas nesta página
+    middleware: ['auth'], 
 });
 const router = useRoute();
 
-// Defina uma variável reativa para armazenar os dados da resposta
 const data = ref(null);
 
-// Utilize onMounted para fazer a requisição após o carregamento da página
 onMounted(async () => {
     try {
         const response = await fetch(`http://localhost:8000/user/${router.params.user}`, {
             method: 'GET',
             credentials: 'include',
             headers: {
-                'Authorization': `Bearer ${useCookie('token').value}`, // Substitua por seu token real
+                'Authorization': `Bearer ${useCookie('token').value}`,
             },
         });
         
@@ -22,11 +20,11 @@ onMounted(async () => {
             throw new Error('Erro ao buscar os dados');
         }
         
-        // Converta a resposta para JSON e armazene na variável reativa
+       
         data.value = await response.json();
     } catch (error) {
         console.error(error);
-        data.value = { error: 'Erro ao carregar os dados' }; // Defina uma mensagem de erro, se necessário
+        data.value = { error: 'Erro ao carregar os dados' }; 
     }
 });
 </script>
@@ -84,7 +82,6 @@ onMounted(async () => {
         </div>
     </div>
     <div v-else>
-      <!-- Exibe uma mensagem enquanto os dados estão sendo carregados -->
       Carregando...
     </div>
 

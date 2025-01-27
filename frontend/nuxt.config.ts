@@ -12,6 +12,6 @@ export default defineNuxtConfig({
   },
   modules: ['@nuxt/image'],
   plugins: [
-    '~/plugins/vue-sonner.js', // Certifique-se de que o plugin está sendo importado
+    '~/plugins/vue-sonner.js',
   ],
 })
