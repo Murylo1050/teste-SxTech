@@ -1,4 +1,6 @@
 <script setup>
+import { jwtDecode } from 'jwt-decode';
+
 definePageMeta({
     middleware: ['auth'], 
 });
@@ -6,7 +8,18 @@ const router = useRoute();
 
 const data = ref(null);
 
+
 onMounted(async () => {
+    const token = useCookie('token').value;
+
+    if (!token) {
+        throw new Error('Token não encontrado.');
+    }
+
+    const decodedToken = jwtDecode(token);
+    navigateTo(`/dashboard/${decodedToken.username}`);
+
+
     try {
         const response = await fetch(`http://localhost:8000/user/${router.params.user}`, {
             method: 'GET',
@@ -19,8 +32,9 @@ onMounted(async () => {
         if (!response.ok) {
             throw new Error('Erro ao buscar os dados');
         }
+
         
-       
+        
         data.value = await response.json();
     } catch (error) {
         console.error(error);
